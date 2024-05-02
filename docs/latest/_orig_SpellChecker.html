@@ -81,9 +81,7 @@
              
   <section id="original-spellchecker-java">
 <h1>Original: SpellChecker.java<a class="headerlink" href="#original-spellchecker-java" title="Link to this heading"></a></h1>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// from the program by Farshad Rum</span>
-<span class="c1">// simplified a little by eoneil for class solutions.</span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">cs310</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">cs310</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileNotFoundException</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileReader</span><span class="p">;</span>
@@ -99,26 +97,13 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.TreeSet</span><span class="p">;</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpellChecker</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="cm">/*</span>
-<span class="cm">	 * misspelled is a map from the misspelled words to list of lines where</span>
-<span class="cm">	 * they happened. .</span>
-<span class="cm">	 */</span>
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">misspelled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-<span class="w">	</span><span class="c1">// the dictionary in use to check words</span>
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dictionary</span><span class="p">;</span>
 
-<span class="w">	</span><span class="c1">// In this implementation, the dictionary is loaded outside SpellChecker </span>
-<span class="w">	</span><span class="c1">// and its Set&lt;String&gt; is passed in here. Alternatively, the constructor</span>
-<span class="w">	</span><span class="c1">// could take the dictionary filename as an argument instead.</span>
 <span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">SpellChecker</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dic</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">		</span><span class="n">dictionary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dic</span><span class="p">;</span>
 <span class="w">	</span><span class="p">}</span>
 
-<span class="w">	</span><span class="c1">// This is the main processing loop. It should be in an object method rather</span>
-<span class="w">	</span><span class="c1">// than in main for greater reusability (we could have multiple</span>
-<span class="w">	</span><span class="c1">// SpellCheckers built around different dictionaries in an app).</span>
-<span class="w">	</span><span class="c1">// Note that this method throws on file not found, because it</span>
-<span class="w">	</span><span class="c1">// doesn&#39;t know how to handle it. That&#39;s fine--let main take care of it.</span>
 <span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkWords</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">inFile</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">		</span><span class="n">Scanner</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">inFile</span><span class="p">));</span>
@@ -127,12 +112,7 @@
 <span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">hasNextLine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
 <span class="w">			</span><span class="n">lineNum</span><span class="o">++</span><span class="p">;</span>
-<span class="w">			</span><span class="c1">// Alternatively here, assume spaces between words: line.split(&quot; &quot;);</span>
-<span class="w">			</span><span class="c1">// Best way: split on white space as follows--</span>
 <span class="w">			</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&quot;\\s+&quot;</span><span class="p">);</span>
-<span class="w">			</span><span class="c1">// or use a Scanner for the line with next(), which by default uses</span>
-<span class="w">			</span><span class="c1">// whitespace delimitation, or use a Scanner with a delimiter</span>
-<span class="w">			</span><span class="c1">// set to a regular expression such as in the above comment.</span>
 
 <span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">tokens</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dictionary</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -147,10 +127,6 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">		</span><span class="n">in</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
 
-<span class="w">		</span><span class="cm">/*</span>
-<span class="cm">		 * After the analysis is done print the findings with each misspelled word</span>
-<span class="cm">		 * followed by lines where it happened and list of possible corrections</span>
-<span class="cm">		 */</span>
 <span class="w">		</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misspelled</span><span class="p">.</span><span class="na">keySet</span><span class="p">();</span>
 <span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">			</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misspelled</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
@@ -159,9 +135,6 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">	</span><span class="p">}</span>
 
-<span class="w">	</span><span class="cm">/*</span>
-<span class="cm">	 * Finds possible alternatives to a misspelled word.</span>
-<span class="cm">	 */</span>
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAlternatives</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addChar</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
 <span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">removeChar</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
@@ -171,9 +144,7 @@
 <span class="w">		</span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list1</span><span class="p">);</span>
 <span class="w">		</span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list2</span><span class="p">);</span>
 <span class="w">		</span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list3</span><span class="p">);</span>
-<span class="w">		</span><span class="c1">// In this implementation, the alternatives are first collected, then checked</span>
-<span class="w">		</span><span class="c1">// against the dictionary. Alternatively (and arguably better), check them</span>
-<span class="w">		</span><span class="c1">// during the process of collecting them.</span>
+
 <span class="w">		</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alterSet</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
 <span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
@@ -182,11 +153,6 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">alterSet</span><span class="p">;</span>
 <span class="w">	</span><span class="p">}</span>
-
-<span class="w">	</span><span class="cm">/*</span>
-<span class="cm">	 * Returns a list of possible words composed by adding a character to anywhere</span>
-<span class="cm">	 * in the given word</span>
-<span class="cm">	 */</span>
 
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">addChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">		</span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">wordBuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">aWord</span><span class="p">);</span>
@@ -203,11 +169,6 @@
 <span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">	</span><span class="p">}</span>
 
-<span class="w">	</span><span class="cm">/*</span>
-<span class="cm">	 * Returns a list of possible alternatives by removing one character from</span>
-<span class="cm">	 * anywhere in the word</span>
-<span class="cm">	 */</span>
-
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">removeChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">		</span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">wordBuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">aWord</span><span class="p">);</span>
 <span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
@@ -221,10 +182,6 @@
 
 <span class="w">	</span><span class="p">}</span>
 
-<span class="w">	</span><span class="cm">/*</span>
-<span class="cm">	 * Returns a list of words by exchanging adjacent characters in the misspelled</span>
-<span class="cm">	 * word.</span>
-<span class="cm">	 */</span>
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">xchangeChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
@@ -238,8 +195,6 @@
 <span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">	</span><span class="p">}</span>
 
-<span class="w">	</span><span class="c1">// helper to main: load word files into main dictionary</span>
-<span class="w">	</span><span class="c1">// Alternatively, add this responsibility to SpellChecker itself</span>
 <span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">loadDictionary</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dic</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dictFile</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="p">{</span>
 <span class="w">		</span><span class="n">Scanner</span><span class="w"> </span><span class="n">fileIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">dictFile</span><span class="p">));</span>
 <span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fileIn</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
@@ -256,20 +211,15 @@
 <span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">dictionary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
 <span class="w">		</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TreeSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">			</span><span class="c1">// one way: load dictionary into a Set&lt;String&gt; before creating SpellChecker</span>
-<span class="w">			</span><span class="c1">// Alternatively, have SpellChecker do the dictionary load itself</span>
 <span class="w">			</span><span class="n">loadDictionary</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span><span class="w"> </span><span class="n">dictionary</span><span class="p">);</span>
-<span class="w">			</span><span class="c1">// create a SpellChecker with the dictionary</span>
 <span class="w">			</span><span class="n">SpellChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SpellChecker</span><span class="p">(</span><span class="n">dic</span><span class="p">);</span>
-<span class="w">			</span><span class="c1">// check words in inFile and report on them</span>
 <span class="w">			</span><span class="n">checker</span><span class="p">.</span><span class="na">checkWords</span><span class="p">(</span><span class="n">inFile</span><span class="p">);</span>
 <span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;File not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w"> </span><span class="c1">// for debugging (remove for production version)</span>
+<span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">		</span><span class="p">}</span>
 
 <span class="w">	</span><span class="p">}</span>
-
 <span class="p">}</span>
 </pre></div>
 </div>

@@ -52,15 +52,44 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OpenAI: SpellChecker.java</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#description-of-spellchecker-java">Description of SpellChecker.java</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#functions-in-spellchecker-java">Functions in SpellChecker.java</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#spellchecker-constructor-set-dic">SpellChecker Constructor (Set<String> dic)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#other-methods">Other Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spellchecker-constructor">SpellChecker Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checkwords">checkWords</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#findalternatives">findAlternatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addchar">addChar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removechar">removeChar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xchangechar">xchangeChar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loaddictionary">loadDictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main">main</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#security-vulnerabilities-in-spellchecker-java">Security Vulnerabilities in SpellChecker.java</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#file-reading-and-exception-handling">File Reading and Exception Handling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#memory-management-issues">Memory Management Issues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#efficiency-in-word-checking">Efficiency in Word Checking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#security-implications">Security Implications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exception-handling">Exception Handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filenotfoundexception">FileNotFoundException</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-validation">Input Validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commandline-arguments-check">CommandLine Arguments Check</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#memory-consumption">Memory Consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#efficiency-of-dictionary-operations">Efficiency of Dictionary Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#concurrency-issues">Concurrency Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-thread-execution">Single Thread Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#security-vulnerabilities">Security Vulnerabilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#file-handling">File Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#general-code-quality">General Code Quality</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#magic-numbers">Magic Numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardcoded-character-range">Hardcoded Character Range</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#recommendations">Recommendations</a></li>
 </ul>
 </li>
 </ul>
@@ -98,75 +127,230 @@
 <h1>OpenAI: SpellChecker.java<a class="headerlink" href="#openai-spellchecker-java" title="Link to this heading"></a></h1>
 <section id="description-of-spellchecker-java">
 <h2>Description of SpellChecker.java<a class="headerlink" href="#description-of-spellchecker-java" title="Link to this heading"></a></h2>
-<p>This Java program implements a <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> class responsible for identifying misspelled words in a given text document based on a dictionary. The class is defined within the <code class="docutils literal notranslate"><span class="pre">cs310</span></code> package and utilizes standard Java libraries for file handling and data manipulation. Here are the key functionalities:</p>
+<p>The provided Java source file defines a program for spell checking and suggests corrections for misspelled words. The program operates by comparing words in an input file against a dictionary of correct words, both of which are provided via command-line arguments. Below is a detailed breakdown of what the code achieves:</p>
 <ol class="arabic simple">
-<li><p><strong>Class Variables</strong>:</p>
+<li><p><strong>Class Definition - SpellChecker</strong>:</p>
 <ul class="simple">
-<li><p><strong>misspelled</strong>: A <code class="docutils literal notranslate"><span class="pre">Map&lt;String,</span> <span class="pre">List&lt;Integer&gt;&gt;</span></code> data structure that tracks misspelled words and the line numbers where these misspellings occur.</p></li>
-<li><p><strong>dictionary</strong>: A <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> holding a list of correctly spelled words provided to the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> object during its instantiation.</p></li>
+<li><p>Introduces functionality for spell checking through various methods.</p></li>
+<li><p>Manages a <code class="docutils literal notranslate"><span class="pre">Set</span></code> containing the dictionary words and a <code class="docutils literal notranslate"><span class="pre">Map</span></code> to keep track of misspelled words and their occurrences in the input text.</p></li>
 </ul>
 </li>
 <li><p><strong>Constructor</strong>:</p>
 <ul class="simple">
-<li><p>The constructor accepts a <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> representing the dictionary of valid words and initializes the dictionary variable with it.</p></li>
+<li><p>The constructor accepts a set of strings which comprise the dictionary.</p></li>
 </ul>
 </li>
-<li><p><strong>File Reading and Word Checking</strong>:</p>
+<li><p><strong>Method - checkWords</strong>:</p>
 <ul class="simple">
-<li><p>The code likely involves methods (not fully visible in the provided snippet) for reading content from a file and iterating through its words.</p></li>
-<li><p>As each word in the text is read, it’s compared against the dictionary. If a word is not found in the dictionary, it is logged in the <code class="docutils literal notranslate"><span class="pre">misspelled</span></code> map along with the line number(s).</p></li>
+<li><p>Accepts a filename as its parameter.</p></li>
+<li><p>Reads the file line by line and splits each line into words.</p></li>
+<li><p>Checks each word against the dictionary. If the word is not found in the dictionary, it is recorded in the <code class="docutils literal notranslate"><span class="pre">misspelled</span></code> map along with the line numbers where the word appears.</p></li>
+<li><p>After processing the entire file, it lists each misspelled word alongside the lines on which they appear and possible correct spellings.</p></li>
 </ul>
 </li>
-<li><p><strong>Output and Error Handling</strong>:</p>
+<li><p><strong>Method - findAlternatives</strong>:</p>
 <ul class="simple">
-<li><p>Given the pattern and typical requirements of a spell checker, the program likely includes functionality to output the list of misspelled words and corresponding lines, aiding users in corrections.</p></li>
-<li><p>Exceptions like <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> are managed, ensuring the program handles errors gracefully.</p></li>
+<li><p>Generates and returns a set of possible corrected spellings for a given misspelled word:</p>
+<ul>
+<li><p>Adding one character.</p></li>
+<li><p>Removing one character.</p></li>
+<li><p>Swapping adjacent characters.</p></li>
+</ul>
+</li>
+<li><p>Only alternatives that exist in the dictionary are retained as valid suggestions.</p></li>
+</ul>
+</li>
+<li><p><strong>Additional Static Methods</strong>:</p>
+<ul class="simple">
+<li><p><strong>addChar:</strong> Generates possible words by adding a single character at every possible position in the word.</p></li>
+<li><p><strong>removeChar:</strong> Generates possible words by removing each character from the word one at a time.</p></li>
+<li><p><strong>xchangeChar:</strong> Generates possible words by swapping each pair of adjacent characters.</p></li>
+<li><p>These methods collectively help in generating potential corrections for misspelled words.</p></li>
+</ul>
+</li>
+<li><p><strong>Static Method - loadDictionary</strong>:</p>
+<ul class="simple">
+<li><p>Populates the dictionary with words from a specified dictionary file. Each word from the file is added to a <code class="docutils literal notranslate"><span class="pre">Set</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Main Method</strong>:</p>
+<ul class="simple">
+<li><p>Validates that exactly two command-line arguments are provided.</p></li>
+<li><p>Initializes the dictionary and the SpellChecker.</p></li>
+<li><p>Calls <code class="docutils literal notranslate"><span class="pre">checkWords</span></code> to process the input text and report misspellings along with suggestions for correction.</p></li>
+<li><p>Handles file not found exceptions appropriately.</p></li>
 </ul>
 </li>
 </ol>
-<p>The <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> class encapsulates the functionality necessary for checking the spelling of words against a predefined list of correct words, making it a useful tool for proofreading text documents programmatically.</p>
+<p>This Java class is complete and robust for the task of spell checking with functionalities supporting word correction suggestions. It iteratively processes an input file against a pre-loaded dictionary and provides not only the locations of misspelled words but also suggests plausible corrections, enhancing user experience and utility.</p>
 <p>(Generated by doc-gen using OpenAI gpt-4-turbo)</p>
 </section>
 <section id="functions-in-spellchecker-java">
 <h2>Functions in SpellChecker.java<a class="headerlink" href="#functions-in-spellchecker-java" title="Link to this heading"></a></h2>
-<section id="spellchecker-constructor-set-dic">
-<h3>SpellChecker Constructor (Set<String> dic)<a class="headerlink" href="#spellchecker-constructor-set-dic" title="Link to this heading"></a></h3>
-<p>Initializes a new instance of the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> class using the provided dictionary. The dictionary is a <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> containing all valid words. This constructor stores the provided dictionary into the <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> variable of the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> instance for later use when checking spellings.</p>
-</section>
-<section id="other-methods">
-<h3>Other Methods<a class="headerlink" href="#other-methods" title="Link to this heading"></a></h3>
-<p>Based on the available snippet, the specific details of other methods are not visible (e.g., methods to read files, check words, and handle outputs). These methods are essential for the operation described and would include functionalities such as:</p>
+<section id="spellchecker-constructor">
+<h3>SpellChecker Constructor<a class="headerlink" href="#spellchecker-constructor" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SpellChecker(Set&lt;String&gt;</span> <span class="pre">dic)</span></code></p>
+<p><strong>Description</strong>:
+Initializes the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> object with a set of words that form the dictionary.</p>
+<p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p>Reading words from the provided document.</p></li>
-<li><p>Checking each word against the dictionary to determine if it is spelled correctly.</p></li>
-<li><p>Managing the storage of misspelled words and their occurrences within the document.</p></li>
-<li><p>Potentially outputting the results or providing interfaces for other systems or users to retrieve or interact with the spell check results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dic</span></code>: A <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> that contains the dictionary words against which the spell checking will be performed.</p></li>
 </ul>
-<p>These methods ensure that the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code> can fulfill its role of validating text against a dictionary and identifying errors effectively.</p>
+</section>
+<section id="checkwords">
+<h3>checkWords<a class="headerlink" href="#checkwords" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">void</span> <span class="pre">checkWords(String</span> <span class="pre">inFile)</span> <span class="pre">throws</span> <span class="pre">FileNotFoundException</span></code></p>
+<p><strong>Description</strong>:
+Processes a text file and identifies words that are not present in the dictionary. It records every occurrence of such misspelled words along with their line numbers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">inFile</span></code>: A string representing the filename path that contains the text to be spell-checked.</p></li>
+</ul>
+<p><strong>Exceptions</strong>:</p>
+<ul class="simple">
+<li><p>Throws <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> if the specified file does not exist.</p></li>
+</ul>
+<p><strong>Behavior</strong>:
+Opens the specified file, reads it line by line, and checks each word found against the dictionary. Misspelled words along with their line_numbers are stored in the <code class="docutils literal notranslate"><span class="pre">misspelled</span></code> map. Following this, it prints each misspelled word with the lines it appears on and suggested corrections.</p>
+</section>
+<section id="findalternatives">
+<h3>findAlternatives<a class="headerlink" href="#findalternatives" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">Set&lt;String&gt;</span> <span class="pre">findAlternatives(String</span> <span class="pre">word)</span></code></p>
+<p><strong>Description</strong>:
+Generates a set of potential corrections by modifying the provided <code class="docutils literal notranslate"><span class="pre">word</span></code> by either adding, removing, or exchanging characters.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">word</span></code>: A string representing the word to generate alternatives for.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p>Returns a <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> containing possible correct variants of the word that exist in the dictionary.</p></li>
+</ul>
+</section>
+<section id="addchar">
+<h3>addChar<a class="headerlink" href="#addchar" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">static</span> <span class="pre">List&lt;String&gt;</span> <span class="pre">addChar(String</span> <span class="pre">aWord)</span></code></p>
+<p><strong>Description</strong>:
+Generates and returns a list of new words by adding each letter from ‘a’ to ‘z’ at every position in the input word.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aWord</span></code>: The word to modify.</p></li>
+</ul>
+<p><strong>Returns</strong>:
+A list of modified words resulting from adding a character at every possible position.</p>
+</section>
+<section id="removechar">
+<h3>removeChar<a class="headerlink" href="#removechar" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">static</span> <span class="pre">List&lt;String&gt;</span> <span class="pre">removeChar(String</span> <span class="pre">aWord)</span></code></p>
+<p><strong>Description</strong>:
+Generates and returns a list of new words formed by removing one character at a time from the input word.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aWord</span></code>: The word to modify.</p></li>
+</ul>
+<p><strong>Returns</strong>:
+A list of modified words resulting from removal of each character.</p>
+</section>
+<section id="xchangechar">
+<h3>xchangeChar<a class="headerlink" href="#xchangechar" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">static</span> <span class="pre">List&lt;String&gt;</span> <span class="pre">xchangeChar(String</span> <span class="pre">aWord)</span></code></p>
+<p><strong>Description</strong>:
+Generates and returns a list of new words formed by swapping each pair of adjacent characters in the input word.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aWord</span></code>: The word to modify.</p></li>
+</ul>
+<p><strong>Returns</strong>:
+A list of modified words resulting from each possible adjacent character swap.</p>
+</section>
+<section id="loaddictionary">
+<h3>loadDictionary<a class="headerlink" href="#loaddictionary" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">void</span> <span class="pre">loadDictionary(Set&lt;String&gt;</span> <span class="pre">dic,</span> <span class="pre">String</span> <span class="pre">dictFile)</span> <span class="pre">throws</span> <span class="pre">FileNotFoundException</span></code></p>
+<p><strong>Description</strong>:
+Populates a set with words from a dictionary file. Each word in the file is added to the given set.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dic</span></code>: A <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> to be filled with words.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dictFile</span></code>: String representing the file path of the dictionary file.</p></li>
+</ul>
+<p><strong>Exceptions</strong>:</p>
+<ul class="simple">
+<li><p>Throws <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> if the dictionary file does not exist.</p></li>
+</ul>
+</section>
+<section id="main">
+<h3>main<a class="headerlink" href="#main" title="Link to this heading"></a></h3>
+<p><strong>Signature</strong>: <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">void</span> <span class="pre">main(String[]</span> <span class="pre">args)</span></code></p>
+<p><strong>Description</strong>:
+The entry point for the Java program. It requires two command-line arguments: the text file to check and the dictionary file to use.</p>
+<p><strong>Behavior</strong>:
+Validates command-line arguments and initializes the spell checker with the dictionary provided. It calls <code class="docutils literal notranslate"><span class="pre">checkWords</span></code> to identify and print misspellings and their corrections. Handles file-not-found exceptions appropriately.</p>
 <p>(Generated by doc-gen using OpenAI gpt-4-turbo)</p>
 </section>
 </section>
 <section id="security-vulnerabilities-in-spellchecker-java">
 <h2>Security Vulnerabilities in SpellChecker.java<a class="headerlink" href="#security-vulnerabilities-in-spellchecker-java" title="Link to this heading"></a></h2>
-<section id="file-reading-and-exception-handling">
-<h3>File Reading and Exception Handling<a class="headerlink" href="#file-reading-and-exception-handling" title="Link to this heading"></a></h3>
-<p>Although the snippet does not show specific file reading operations, it does import <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> and mentions file reading in the descriptive comment. The explicit handling of <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> suggests that the code is prepared to manage scenarios where the dictionary file or other necessary files are not found. However, other I/O exceptions like <code class="docutils literal notranslate"><span class="pre">IOException</span></code> are not mentioned, which could represent an issue if not handled, potentially leading to ungraceful termination or corrupted program states during I/O operations.</p>
+<section id="exception-handling">
+<h3>Exception Handling<a class="headerlink" href="#exception-handling" title="Link to this heading"></a></h3>
+<section id="filenotfoundexception">
+<h4>FileNotFoundException<a class="headerlink" href="#filenotfoundexception" title="Link to this heading"></a></h4>
+<p>While the <code class="docutils literal notranslate"><span class="pre">checkWords</span></code> and <code class="docutils literal notranslate"><span class="pre">loadDictionary</span></code> methods correctly signal that they can throw <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code>, this exception is only minimally handled in the <code class="docutils literal notranslate"><span class="pre">main</span></code> method. When this exception occurs, the program simply prints an error message and the stack trace. For a more robust and user-friendly solution, the program should perhaps attempt to resolve or provide more specific guidance on how to resolve the issue (e.g., checking if the file path is correct or suggesting the correct format).</p>
 </section>
-<section id="memory-management-issues">
-<h3>Memory Management Issues<a class="headerlink" href="#memory-management-issues" title="Link to this heading"></a></h3>
-<p>The usage of collections like <code class="docutils literal notranslate"><span class="pre">HashMap</span></code> and <code class="docutils literal notranslate"><span class="pre">HashSet</span></code> suggests that the implementation holds all dictionary words and potentially all analyzed text in memory. If very large texts are processed, or if the dictionary is exceedingly large, this could lead to high memory consumption, possibly exhausting available memory resources.</p>
 </section>
-<section id="efficiency-in-word-checking">
-<h3>Efficiency in Word Checking<a class="headerlink" href="#efficiency-in-word-checking" title="Link to this heading"></a></h3>
-<p>The decision to use a <code class="docutils literal notranslate"><span class="pre">HashSet</span></code> for the dictionary implies efficient average-time complexity for lookups (O(1) on average). However, if the implementation of word comparison is case-sensitive (which often is the default for <code class="docutils literal notranslate"><span class="pre">String</span></code> comparisons in Java), this might lead to misidentifications when the case usage in text does not match dictionary entries exactly, unless specifically accounted for in other parts of the program.</p>
+<section id="input-validation">
+<h3>Input Validation<a class="headerlink" href="#input-validation" title="Link to this heading"></a></h3>
+<section id="commandline-arguments-check">
+<h4>CommandLine Arguments Check<a class="headerlink" href="#commandline-arguments-check" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> method does check the number of command-line arguments and provides some feedback if they are not as expected. However, it does not check whether the provided arguments point to files that actually exist or can be accessed (beyond the handling of <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code>), nor does it check if the provided files are in a suitable format for processing. This can lead to confusion or misleading output if erroneous files are provided.</p>
 </section>
-<section id="security-implications">
-<h3>Security Implications<a class="headerlink" href="#security-implications" title="Link to this heading"></a></h3>
+</section>
+<section id="performance-considerations">
+<h3>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading"></a></h3>
+<section id="memory-consumption">
+<h4>Memory Consumption<a class="headerlink" href="#memory-consumption" title="Link to this heading"></a></h4>
+<p>Given that the entire dictionary is loaded into memory, if the dictionary file is exceptionally large, this could potentially consume a substantial amount of memory, impacting the performance of the system running this application.</p>
+</section>
+<section id="efficiency-of-dictionary-operations">
+<h4>Efficiency of Dictionary Operations<a class="headerlink" href="#efficiency-of-dictionary-operations" title="Link to this heading"></a></h4>
+<p>The dictionary lookups (checking if a word exists in the dictionary during spell-checking, and while filtering valid alternatives) are efficient since a <code class="docutils literal notranslate"><span class="pre">HashSet</span></code> or <code class="docutils literal notranslate"><span class="pre">TreeSet</span></code> is likely used, offering average-case constant time complexity for basic operations. However, the initial loading and the size of the dictionary can impact startup and operational efficiency.</p>
+</section>
+</section>
+<section id="concurrency-issues">
+<h3>Concurrency Issues<a class="headerlink" href="#concurrency-issues" title="Link to this heading"></a></h3>
+<section id="single-thread-execution">
+<h4>Single Thread Execution<a class="headerlink" href="#single-thread-execution" title="Link to this heading"></a></h4>
+<p>All operations including file reading, dictionary checking, and printing results are performed in a single thread of execution. For large inputs or dictionaries, this can lead to significant processing time. Introducing concurrency or parallel processing for checking words and generating alternatives might significantly enhance performance.</p>
+</section>
+</section>
+<section id="security-vulnerabilities">
+<h3>Security Vulnerabilities<a class="headerlink" href="#security-vulnerabilities" title="Link to this heading"></a></h3>
+<section id="file-handling">
+<h4>File Handling<a class="headerlink" href="#file-handling" title="Link to this heading"></a></h4>
+<p>Directly opening files based on command-line arguments without sanitizing or validating them might expose the program to vulnerabilities if integrated into a more extensive system where file names or paths could be manipulated.</p>
+</section>
+</section>
+<section id="general-code-quality">
+<h3>General Code Quality<a class="headerlink" href="#general-code-quality" title="Link to this heading"></a></h3>
+<section id="magic-numbers">
+<h4>Magic Numbers<a class="headerlink" href="#magic-numbers" title="Link to this heading"></a></h4>
+<p>The code uses some “magic numbers” and strings (like <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(args.length</span> <span class="pre">!=</span> <span class="pre">2)</span></code>). It would be enhanced by defining these as static constants, making the code more readable and maintainable.</p>
+</section>
+<section id="hardcoded-character-range">
+<h4>Hardcoded Character Range<a class="headerlink" href="#hardcoded-character-range" title="Link to this heading"></a></h4>
+<p>In methods <code class="docutils literal notranslate"><span class="pre">addChar</span></code> and <code class="docutils literal notranslate"><span class="pre">xchangeChar</span></code>, the character range is hardcoded to English lowercase (‘a’ to ‘z’). This limits the applicability of the spell-checker to languages using similar alphabets and doesn’t account for uppercase letters, alphabets from other languages, or typographical errors involving symbols or numbers.</p>
+</section>
+</section>
+<section id="recommendations">
+<h3>Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading"></a></h3>
+<p>To improve the robustness and usability of the program:</p>
 <ul class="simple">
-<li><p><strong>Injection &amp; Manipulation</strong>: There is no mention of security measures regarding the inputs from files. Malformed or maliciously crafted files could potentially exploit weak points in file handling or word-processing logic.</p></li>
-<li><p><strong>Data Privacy</strong>: Depending on what texts are processed (e.g., sensitive documents), without explicit security features or compliance considerations, there might be risks regarding data confidentiality.</p></li>
+<li><p>Implement more comprehensive error handling and user guidance.</p></li>
+<li><p>Consider memory and efficiency optimizations, particularly around dictionary usage.</p></li>
+<li><p>Explore multi-threading for performance enhancement.</p></li>
+<li><p>Validate and sanitize file inputs to enhance security.</p></li>
+<li><p>Refactor magic numbers and strings into clearly defined constants.</p></li>
+<li><p>Extend character handling to support a broader range of input types.</p></li>
 </ul>
-<p>Each of these points represents a possible improvement or consideration area for refining the <code class="docutils literal notranslate"><span class="pre">SpellChecker</span></code>’s robustness, performance, and security posture.</p>
 <p>(Generated by doc-gen using OpenAI gpt-4-turbo)</p>
 </section>
 </section>
