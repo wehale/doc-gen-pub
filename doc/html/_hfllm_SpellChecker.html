@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HuggingFace: SpellChecker.java &mdash; doc-gen.ai  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="HuggingFace: calc.c" href="_hfllm_calc.html" />
+    <link rel="prev" title="GoogleAI: calc.c" href="_gllm_calc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            doc-gen.ai
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="_gllm_SpellChecker.html">GoogleAI: SpellChecker.java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_gllm_calc.html">GoogleAI: calc.c</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HuggingFace: SpellChecker.java</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description-spellchecker-java">Description: SpellChecker.java</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#description-of-spellchecker-implementation">Description of SpellChecker implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functions-spellchecker-java">Functions: SpellChecker.java</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#function-and-method-documentation">Function and Method Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#spellchecker">SpellChecker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-vulnerabilities-spellchecker-java">Security Vulnerabilities: SpellChecker.java</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#possible-security-vulnerabilities">Possible Security Vulnerabilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_hfllm_calc.html">HuggingFace: calc.c</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_oaillm_SpellChecker.html">OpenAI: SpellChecker.java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_oaillm_calc.html">OpenAI: calc.c</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_orig_SpellChecker.html">Original: SpellChecker.java</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_orig_calc.html">Original: calc.c</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">doc-gen.ai</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">HuggingFace: SpellChecker.java</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/_hfllm_SpellChecker.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="huggingface-spellchecker-java">
+<h1>HuggingFace: SpellChecker.java<a class="headerlink" href="#huggingface-spellchecker-java" title="Link to this heading"></a></h1>
+<section id="description-spellchecker-java">
+<h2>Description: SpellChecker.java<a class="headerlink" href="#description-spellchecker-java" title="Link to this heading"></a></h2>
+<section id="description-of-spellchecker-implementation">
+<h3>Description of SpellChecker implementation<a class="headerlink" href="#description-of-spellchecker-implementation" title="Link to this heading"></a></h3>
+<p>The provided code defines a Java class called SpellChecker that is responsible for identifying misspelled words in a given text file and suggesting possible alternatives. The implementation follows a modular structure, with independent methods for loading the dictionary, checking words in a text file, finding alternatives, and handling exceptions.</p>
+<p>The class takes the dictionary as an input and stores it as a Set of strings. The dictionary can either be loaded by the main method or passed as an argument to the SpellChecker constructor. In this implementation, the dictionary is implemented as a TreeSet to ensure that words are always sorted and looked up quickly.</p>
+<p>The main processing loop is implemented in a method called checkWords. This method generates a LinkedList for storing the line numbers where misspelled words occur, and uses a Map called misspelled to store the misspelled words as keys and their corresponding line numbers as values. This Map is constructed on-the-fly as the text is being processed, allowing efficient lookups and updating of the misspelled word locations.</p>
+<p>The alternatives for each misspelled word are found in a private method called findAlternatives. This method collects all possible alterations that can result from adding, removing, or substituting a character in the misspelled word. These alterations are then checked against the dictionary to filter out those that are not valid words.</p>
+<p>The final step is to print the results, displaying each misspelled word, its line numbers, and a list of potential corrections. This is done by iterating through the keys in the Map class, which returns the misspelled words, and then accessing their corresponding line numbers and alterations using the Get() method of the Map. The suggestions are then added to a Set, which is filtered during iteration to remove words that already are in the dictionary.</p>
+<p>The loadDictionary() method is an optional helper to the main method, which can load the dictionary into a Set before instantiating the SpellChecker object. However, this could be incorporated directly into the SpellChecker constructor for a simpler approach.</p>
+<p>The program provides a main() method that handles command-line arguments, ensuring that the correct number of parameters is provided and passes them correctly to the SpellChecker object. The program also handles FileNotFoundExceptions through try-catch blocks, freeing the main() method from this responsibility.</p>
+<p>(Generated by doc-gen using Hugging Face openai-community/gpt2)</p>
+</section>
+</section>
+<section id="functions-spellchecker-java">
+<h2>Functions: SpellChecker.java<a class="headerlink" href="#functions-spellchecker-java" title="Link to this heading"></a></h2>
+<section id="function-and-method-documentation">
+<h3>Function and Method Documentation<a class="headerlink" href="#function-and-method-documentation" title="Link to this heading"></a></h3>
+<section id="spellchecker">
+<h4>SpellChecker<a class="headerlink" href="#spellchecker" title="Link to this heading"></a></h4>
+<section id="constructor">
+<h5>Constructor<a class="headerlink" href="#constructor" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="nf">SpellChecker</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dic</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">dictionary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dic</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This constructor takes a pre-populated dictionary <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> andsets it to the SpellChecker’s <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> field.</p>
+</section>
+<section id="checkwords-string-infile">
+<h5>checkWords(String inFile)<a class="headerlink" href="#checkwords-string-infile" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkWords</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">inFile</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">inFile</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lineNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">hasNextLine</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+<span class="w">        </span><span class="n">lineNum</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// split the string into an array of strings based on whitespace</span>
+<span class="w">        </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&quot;\\s+&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">tokens</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dictionary</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misspelled</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">misspelled</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">lines</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">lines</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">lineNum</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">in</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misspelled</span><span class="p">.</span><span class="na">keySet</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misspelled</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findAlternatives</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:   &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alters</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function takes a file path as a parameter, reads the file line by line, splits the line into an array of words, and checks if each word is in the dictionary. If it’s not in the dictionary, it adds it to a <code class="docutils literal notranslate"><span class="pre">Map</span></code> with the previous list for that word or creates a new list. Afterwards, it iterates through the <code class="docutils literal notranslate"><span class="pre">Map</span></code> and prints each misspelled word, its lines, and possible alternatives still in the dictionary.</p>
+</section>
+<section id="findalternatives-string-word">
+<h5>findAlternatives(String word)<a class="headerlink" href="#findalternatives-string-word" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAlternatives</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addChar</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">removeChar</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xchangeChar</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alterSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">alterSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alterSet</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dictionary</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">alter</span><span class="p">))</span>
+<span class="w">            </span><span class="n">iter</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">alterSet</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function returns a set of potential alternatives for the misspelled word, using three methods: <code class="docutils literal notranslate"><span class="pre">addChar()</span></code>, <code class="docutils literal notranslate"><span class="pre">removeChar()</span></code>, and <code class="docutils literal notranslate"><span class="pre">xchangeChar()</span></code>. The returns the result set after removing any strings that aren’t in the dictionary.</p>
+</section>
+<section id="addchar-string-aword">
+<h5>addChar(String aWord)<a class="headerlink" href="#addchar-string-aword" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">addChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">wordBuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">aWord</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">aWord</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">ch</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">alter</span><span class="p">);</span>
+<span class="w">            </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This static helper method adds a character (any lowercase letter) to the misspelled word at any position and returns the list of resulting strings.</p>
+</section>
+<section id="removechar-string-aword">
+<h5>removeChar(String aWord)<a class="headerlink" href="#removechar-string-aword" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">removeChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">wordBuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">aWord</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">aWord</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">deleteCharAt</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">alter</span><span class="p">);</span>
+<span class="w">        </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This static helper method removes a character (any character) from the misspelled word at any position and returns the list of resulting strings.</p>
+</section>
+<section id="xchangechar-string-aword">
+<h5>xchangeChar(String aWord)<a class="headerlink" href="#xchangechar-string-aword" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">xchangeChar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">aWord</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">aWord</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">wordBuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">aWord</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">deleteCharAt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wordBuff</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">alter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This static helper method exchanges adjacent characters in the misspelled word and returns the list of resulting strings.</p>
+</section>
+<section id="loaddictionary-set-dic-string-dictfile">
+<h5>loadDictionary(Set<String> dic, String dictFile)<a class="headerlink" href="#loaddictionary-set-dic-string-dictfile" title="Link to this heading"></a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">loadDictionary</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dic</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dictionary</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">fileIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">dictionary</span><span class="p">));</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fileIn</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dic</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">fileIn</span><span class="p">.</span><span class="na">next</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">fileIn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This static helper method loads a dictionary file (specified by the path <code class="docutils literal notranslate"><span class="pre">String</span> <span class="pre">dictionary</span></code>) into a <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span></code> (specified by the reference <code class="docutils literal notranslate"><span class="pre">Set&lt;String&gt;</span> <span class="pre">dic</span></code>). Throws <code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code> if the file is not found.</p>
+<p>(Generated by doc-gen using Hugging Face openai-community/gpt2)</p>
+</section>
+</section>
+</section>
+</section>
+<section id="security-vulnerabilities-spellchecker-java">
+<h2>Security Vulnerabilities: SpellChecker.java<a class="headerlink" href="#security-vulnerabilities-spellchecker-java" title="Link to this heading"></a></h2>
+<section id="possible-security-vulnerabilities">
+<h3>Possible Security Vulnerabilities<a class="headerlink" href="#possible-security-vulnerabilities" title="Link to this heading"></a></h3>
+<p>The source provided between the &lt;start_code&gt; and &lt;end_code&gt; delimiters does not seem to have any clear indications of security vulnerabilities. However, it’s essential to understand the context of the application’s usage and any external dependencies before completely dismissing the possibility of vulnerabilities. Here are a few potential security concerns:</p>
+<ol class="arabic simple">
+<li><p>The application accepts user input in the form of the dictionary file. This input could potentially contain malicious code that could be executed by the application. Although the provided implementation doesn’t seem to execute any user-provided code, it’s essential to validate the input to ensure it’s in the correct format and does not exceed any size restrictions.</p></li>
+<li><p>The dictionary file is loaded outside the SpellChecker object. This design could potentially lead to concurrent loading of the dictionary across multiple SpellChecker instances, causing race conditions or inconsistencies. To avoid this issue, it’s recommended to load the dictionary once and pass it to all SpellChecker instances.</p></li>
+<li><p>The provided implementation has no mechanism to validate the input file’s format. Malformed or corrupted files could potentially cause exceptions or memory leaks that could compromise the application’s stability and security. Be sure to validate the input file’s format based on the specific needs of the application.</p></li>
+</ol>
+<p>It’s crucial to address these potential security concerns by implementing appropriate input validation, access control, and exception handling mechanisms. Doing so would enhance the application’s overall security and reliability.</p>
+<p>(Generated by doc-gen using Hugging Face openai-community/gpt2)</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_gllm_calc.html" class="btn btn-neutral float-left" title="GoogleAI: calc.c" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_hfllm_calc.html" class="btn btn-neutral float-right" title="HuggingFace: calc.c" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
